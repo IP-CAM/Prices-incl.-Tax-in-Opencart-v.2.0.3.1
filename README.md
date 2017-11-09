@@ -2,3 +2,6 @@
 OpenCart mod to stop adding taxes on top of the entered price
 
 Uses the [OCMod](https://github.com/opencart/opencart/wiki/Modification-System) system
+
+Tested on:
+- v2.0.3.1
