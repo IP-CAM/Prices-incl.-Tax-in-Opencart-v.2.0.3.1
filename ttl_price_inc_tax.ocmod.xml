@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Prices are Inc Tax</name>
+    <code>ttl_price_inc_tax</code>
+    <version>1.1</version>
+    <author>Move Digital</author>
+    <link>http://www.movedigital.com.au</link>
+    <file path="catalog/view/theme/default/template/product/product.tpl">
+        <operation>
+            <search>
+                <![CDATA[<?php if ($tax) { ?>]]>
+            </search>
+            <add position="replace">
+                <![CDATA[<?php if ($tax && false) { ?>]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/category.tpl">
+        <operation>
+            <search>
+                <![CDATA[<?php if ($product['tax']) { ?>]]>
+            </search>
+            <add position="replace">
+                <![CDATA[<?php if ($product['tax'] && false) { ?>]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/model/total/tax.php">
+        <operation>
+            <search>
+                <![CDATA[$total += $value;]]>
+            </search>
+            <add position="replace">
+                <![CDATA[//$total += $value;]]>
+            </add>
+        </operation>
+    </file>
+    <file path="system/library/tax.php">
+        <operation>
+            <search>
+                <![CDATA[public function getTax($value, $tax_class_id) {]]>
+            </search>
+            <add position="after">
+                <![CDATA[return $value;]]>
+            </add>
+        </operation>
+            <operation>
+                <search>
+                    <![CDATA[public function calculate($value, $tax_class_id, $calculate = true) {]]>
+                </search>
+                <add position="after">
+                    <![CDATA[return $value;]]>
+                </add>
+            </operation>
+        <operation>
+            <search>
+                <![CDATA[$amount += $tax_rate['rate'];]]>
+            </search>
+            <add position="replace">
+                <![CDATA[$amount = $tax_rate['rate'];]]>
+            </add>
+        </operation>
+        <operation>
+            <search>
+                <![CDATA[$amount += ($value / 100 * $tax_rate['rate']);]]>
+            </search>
+            <add position="replace">
+                <![CDATA[$amount = ($value / 100 * $tax_rate['rate']);]]>
+            </add>
+        </operation>
+    </file>
+</modification>
